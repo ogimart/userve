@@ -1,0 +1,34 @@
+{
+ ;; CONFIGURATION
+
+ ;; HTTP Server
+ :immutant-web {:dev-mode false
+                :port 8080
+                :host "0.0.0.0"
+                :path "/"}
+
+ ;; Redis
+ :redis {:pool {}
+         :spec {:host "localhost" :port 6379}}
+
+ ;; DB Specs
+ :h2-mem {:adapter "h2"
+          :url "jdbc:h2:mem:"
+          :user "sa"
+          :password ""}
+
+ ;; COMPONENTS
+
+ :comp/database {:sc/create-fn {{name}}.components.hikaricp/new-dbpool
+                 :sc/merge [{:to [:db-spec] :from [:h2-mem]}]}
+
+ :comp/redis-conn {:sc/create-fn {{name}}.components.redis/new-redis
+                   :sc/merge [{:to [:redis-conn] :from [:redis]}]}
+
+ :comp/http-server {:sc/create-fn {{name}}.components.immutant-web/new-httpserver
+                    :handler {{name}}.routes.handler/handler
+                    :sc/merge [{:to [:options] :from [:immutant-web]}]
+                    :sc/refs {:db :comp/database
+                              :redis-conn :comp/redis-conn}}
+
+ }
