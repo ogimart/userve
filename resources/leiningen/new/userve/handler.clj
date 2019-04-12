@@ -7,32 +7,32 @@
             [{{name}}.util.middleware
              :refer [wrap-comp wrap-cors wrap-exception]]))
 
-(defn root-handler
+(defn root-endpoint
   "root handler"
   [request]
   (res/response "Http Server"))
 
-(defn not-found-handler
+(defn not-found-endpoint
   "error handler"
   [request]
   (res/not-found "Not found"))
 
-(defn db-connections-handler
+(defn db-connections-endpoint
   "/monitor/db-connections handler"
   [{:keys [comp]}]
   (res/response (str "db connections: "
                      (monitor/db-connections (:db comp)))))
 
-(defn redis-ping-handler
+(defn redis-ping-endpoint
   "/monitor/redis-ping handler"
   [{:keys [comp]}]
   (res/response (str "redis ping: "
                      (monitor/redis-ping (:redis-conn comp)))))
 
-(def routes ["/" [["" root-handler]
-                  ["monitor/" [["db-connections" db-connections-handler]
-                               ["redis-ping" redis-ping-handler]]]
-                  [true not-found-handler]]])
+(def routes ["/" [["" root-endpoint]
+                  ["monitor/" [["db-connections" db-connections-endpoint]
+                               ["redis-ping" redis-ping-endpoint]]]
+                  [true not-found-endpoint]]])
 
 (defn handler
   "app handler, wraps component"

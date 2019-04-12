@@ -4,7 +4,7 @@ Clojure Microservice Template
 
 ## Description
 
-Quite often we need to quickly create a few microservices with REST API or with a couple of endpoints for service health checks. They all usually have the same or similar structure and common dependencies. μServe is a small microservice Leiningen template built around Stuart Sierra's [component](https://github.com/stuartsierra/component), that help us avoid writing the same boilerplate code. μServe aims to be a micro framework for microservices, rather than full-blown web or system framework. This template utilizes Walmart Lab's [schematic](https://github.com/walmartlabs/schematic) and [dyn-edb](https://github.com/walmartlabs/dyn-edn) libraries for configuring components and environment in edn files. 
+Quite often we need to quickly create a few microservices with REST API or with a couple of endpoints for service health checks. They all usually have the same or similar structure and common dependencies. μServe is a small microservice Leiningen template built around Stuart Sierra's [component](https://github.com/stuartsierra/component), that help us avoid writing the same boilerplate code. μServe aims to be a micro template for microservices, rather than full-blown web or system framework. This template utilizes Walmart Lab's [schematic](https://github.com/walmartlabs/schematic) and [dyn-edb](https://github.com/walmartlabs/dyn-edn) libraries for configuring components and environment in edn files. 
 
 ## Components
 
@@ -24,8 +24,6 @@ Quite often we need to quickly create a few microservices with REST API or with 
 ``` shell
 lein new userve service-name
 ```
-
-Note: note yet released on clojars.
 
 ## Directory structure
 
